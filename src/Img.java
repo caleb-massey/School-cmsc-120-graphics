@@ -24,10 +24,16 @@
 //
 // A color is a name, "red" or "darkgreen" or "dark-green", a hex code such as
 // "#cc0033", or the reading's Color: Color.RED, Color.color(0.2, 0.4, 0.8).
-// And anything drawn the reading's way, a Rectangle, a Polygon, a Pane with
-// shapes in it, becomes an Img with Img.of, to put beside the others:
 //
-//     Img.beside(Img.of(new Rectangle(0, 0, 30, 60)), Img.circle(30, "solid", "red"))
+// The reading's own shapes go in too, wherever an Img does: beside, above,
+// overlay, rotate, show, width and height all take a Rectangle, a Circle, a
+// Polygon, a Pane with shapes in it, and Img.of turns one into an Img:
+//
+//     Img.beside(new Rectangle(150, 300, Color.RED), Img.circle(30, "solid", "gold"))
+//
+// A shape is taken as it is at that line: change its color afterwards, and
+// the picture made from it stays as it was. Its x and y do not matter here;
+// beside, above and overlay decide where it goes.
 //
 // The reading's own programs are in chap03/ and the folders beside it, and
 // Reading.java runs them.
@@ -209,6 +215,28 @@ class Img {
             return new Group(n);
         });
     }
+
+    // -- the reading's shapes, straight in -------------------------------------
+    // Each of these turns the shape into an Img with Img.of, then does what
+    // the Img version above does. One per mix, because Java picks a method by
+    // the types it is handed: two shapes, a shape and an Img, an Img and a shape.
+
+    static Img beside(Node left, Node right) { return beside(of(left), of(right)); }
+    static Img beside(Node left, Img right)  { return beside(of(left), right); }
+    static Img beside(Img left, Node right)  { return beside(left, of(right)); }
+
+    static Img above(Node top, Node bottom) { return above(of(top), of(bottom)); }
+    static Img above(Node top, Img bottom)  { return above(of(top), bottom); }
+    static Img above(Img top, Node bottom)  { return above(top, of(bottom)); }
+
+    static Img overlay(Node front, Node back) { return overlay(of(front), of(back)); }
+    static Img overlay(Node front, Img back)  { return overlay(of(front), back); }
+    static Img overlay(Img front, Node back)  { return overlay(front, of(back)); }
+
+    static Img rotate(double degrees, Node n) { return rotate(degrees, of(n)); }
+    static void show(Node n)                  { show(of(n)); }
+    static int width(Node n)                  { return width(of(n)); }
+    static int height(Node n)                 { return height(of(n)); }
 
     // -- showing one ---------------------------------------------------------
 
