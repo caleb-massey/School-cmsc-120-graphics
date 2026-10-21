@@ -16,7 +16,9 @@ for Java.
 
 ## In IntelliJ IDEA
 
-Welcome screen → **Get from VCS** → paste this repository's URL → **Clone**.
+From the project IDEA opens with: the menu button (☰, top left) → **File** →
+**New** → **Project from Version Control…** → paste this repository's URL →
+**Clone**.
 If IDEA asks whether to load the Maven project, say yes, and wait for it to
 finish fetching. Then open `src/Tricolor.java` and press the green Run arrow
 beside `main`: a window opens with the flag in it, and the program ends when
