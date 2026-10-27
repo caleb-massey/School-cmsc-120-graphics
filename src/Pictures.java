@@ -1,56 +1,49 @@
-Img tricolor() {
-    return Img.beside(Img.rectangle(30, 60, "solid", "green"),
-                      Img.beside(Img.rectangle(30, 60, "solid", "white"),
-                                 Img.rectangle(30, 60, "solid", "red")));
-
+// creates a flag of 3 vertical lines, it's size is determined by unit, 
+// color by first, second, third
+Img vertical(int unit, String first, String second, String third){
+    int height = 2 * unit;
+    int width = unit;
+    String fill = "solid";
+    return Img.beside(
+        Img.rectangle(width, height, fill, first), 
+        Img.beside(
+            Img.rectangle(width, height, fill, second), 
+            Img.rectangle(width, height, fill, third))
+    );
 }
 
-Img armenia(int unit){
+// creates a flag of 3 horizontal lines, it's size is determined by unit, 
+// color by first, second, third
+Img horizontal(int unit, String first, String second, String third){
     int height = unit;
-    int width = 4 * unit;
-    return Img.above(Img.rectangle(width, height, "solid", "red"), 
-                     Img.above(Img.rectangle(width, height, "solid", "blue"), 
-                               Img.rectangle(width, height, "solid", "orange")));
+    int width = 5 * unit;
+    String fill = "solid";
+    return Img.above(
+    Img.rectangle(width, height, fill, first), 
+    Img.above(
+        Img.rectangle(width, height, fill, second), 
+        Img.rectangle(width, height, fill, third))
+    );
 }
-
-Img row3(Img i){
-    return Img.beside(i, Img.beside(i, i));
-}
-
-// returns grid of nine of the image given
-Img grid3(Img i){
-    return Img.above(row3(i), Img.above(row3(i), row3(i)));
-}
-
-Img quad(Img a, Img b){
-    Img top = Img.beside(a, b);
-    Img bottom = Img.beside(b, a);
-    return Img.above(top, bottom);
-}
-
-
-// reutrns checker pattern, with the amount double the sides
-Img checker2(int side){
-    Img white = Img.square(side, "solid", "white");
-    Img black = Img.square(side, "solid", "black");
-    return quad(black, white);
-} 
-
 
 void main(){
-    // Check grid3
-    Check.is(Img.width(grid3(tricolor())), 270);
-    Check.is(Img.width(grid3(armenia(20))), 240);
+    // Check vertical
+    Img France = vertical(30, "blue",    "white", "red");
+    Img Ireland = vertical(30, "green", "white", "orange");
+    
+    Check.is(Img.width(Ireland), 90);
+    Check.is(Img.height(France), 60);
 
-    Check.is(Img.height(grid3(tricolor())), 180);
-    Check.is(Img.height(grid3(armenia(20))), 180);
+    // Check horizontal
+    Img Germany = horizontal(18,    "black", "red", "gold");
+    Img Armenia = horizontal(30, "red", "blue", "gold");
+    Check.is(Img.width(Germany), 90);
+    Check.is(Img.height(Armenia), 90);
 
-    Check.is(Img.width(checker2(10)), 20);
+
 
 
 
     Check.done();
-    Img.show(grid3(tricolor()));
-    Img.show(grid3(armenia(20)));
-    Img.show(checker2(10));
+    Img.show(Germany);
 }
