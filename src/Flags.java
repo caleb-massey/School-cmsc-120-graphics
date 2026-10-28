@@ -43,9 +43,8 @@ Img japan(int unit){
     int height = 2 * unit;
     int width = 3 * unit;
     String fill = "solid";
-    Img disc = disc(unit);
     Img whiteRectangle = Img.rectangle(width, height, fill, "white");
-    return Img.overlay(disc, whiteRectangle);
+    return Img.overlay(disc(unit), whiteRectangle);
 }
 
 // PART B
@@ -84,17 +83,17 @@ Img blend(Color first, Color third, int unit){
 void main(){
     // Part A
     // Check vertical
-    Img France = vertical(30, "blue",    "white", "red");
-    Img Ireland = vertical(30, "green", "white", "orange");
+    Img regFrance = vertical(30, "blue",    "white", "red");
+    Img regIreland = vertical(30, "green", "white", "orange");
     
-    Check.is(Img.width(Ireland), 90);
-    Check.is(Img.height(France), 60);
+    Check.is(Img.width(regIreland), 90);
+    Check.is(Img.height(regFrance), 60);
 
     // Check horizontal
-    Img Germany = horizontal(18, "black", "red", "gold");
-    Img Armenia = horizontal(40, "red", "blue", "gold");
-    Check.is(Img.width(Germany), 90);
-    Check.is(Img.height(Armenia), 120);
+    Img regGermany = horizontal(18, "black", "red", "gold");
+    Img regArmenia = horizontal(40, "red", "blue", "gold");
+    Check.is(Img.width(regGermany), 90);
+    Check.is(Img.height(regArmenia), 120);
 
     // Check disc & japan
     Check.is(Img.width(disc(30)), 36);
@@ -122,10 +121,11 @@ void main(){
     Img.show(blend(Color.RED, Color.BLUE, 30)); //  it is purple, idk how to write a check for that though
 
     // Check the other flags
-    Img.show(France);
-    Img.show(Ireland);
-    Img.show(Germany);
-    Img.show(Armenia);
+    Img.show(regFrance);
+    Img.show(regIreland);
+    Img.show(regGermany);
+    Img.show(regArmenia);
+    Img.show(japan(30));
     Img.show(draw(france, 40));
     Img.show(draw(germany, 40));
     Img.show(draw(turned(france), 40));
